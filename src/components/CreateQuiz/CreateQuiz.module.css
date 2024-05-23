@@ -1,0 +1,90 @@
+.container{
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  height: 100vh;
+  width: 100vw;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: rgba(0, 0, 0, 0.7);
+  /* z-index: 10; */
+  /* overflow: hidden; */
+}
+
+.subContainer{
+  height: 40vh;
+  width: 40vw;
+  display: flex;
+  /* flex-direction: column; */
+  align-items: center;
+  justify-content: center;
+  background: white;
+  position: relative;
+  border-radius: 5px;
+}
+
+.innerBox{
+  height: 80%;
+  width: 80%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-evenly;
+  
+}
+
+.input{
+  width: 100%;
+  /* height: ; */
+  padding: 2% 1%;
+  box-shadow: 0px 0px 14px 0px #0000001F;
+  border: none;
+  border-radius: 5px;
+}
+
+.quizType{
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  color: #9F9F9F;
+}
+
+.buttonBox{
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  
+}
+
+.button{
+  width: 20%;
+  padding: 1% 1%;
+  box-shadow: 0px 0px 14px 0px #0000001F;
+  border: none;
+  border-radius: 5px;
+  color: #9F9F9F;
+background: none;
+}
+
+.cancel{
+  width: 40%;
+  padding: 1% 1%;
+  box-shadow: 0px 0px 14px 0px #0000001F;
+  border: none;
+  border-radius: 5px;
+  color: #9F9F9F;
+background: none;
+}
+
+.continue{
+  width: 40%;
+  padding: 1% 1%;
+  
+  border: none;
+  border-radius: 5px;
+  color: white;
+background: #60B84B;
+}

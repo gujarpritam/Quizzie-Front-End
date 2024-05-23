@@ -33,7 +33,7 @@ function Login() {
 
     console.log(result);
     if (result) {
-      // navigate("/");
+      navigate("/home");
       return;
     }
 
