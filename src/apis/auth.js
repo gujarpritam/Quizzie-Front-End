@@ -29,8 +29,9 @@ export const loginUser = async ({ email, password }) => {
     const response = await axios.post(reqUrl, { email, password });
 
     localStorage.setItem("quizzieToken", response?.data?.token);
+    localStorage.setItem("email", response?.data?.email);
 
-    return response?.data?.name;
+    return response?.data?.email;
   } catch (error) {
     console.log(error);
     // alert("Something went wrong");

@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { setQuizInfo } from "../../slices/quizInfoSlice";
 import styles from "./CreateQuiz.module.css";
+import { ToastContainer, toast } from "react-toastify";
 
 function CreateQuiz({ quiz, setQuiz }) {
   const [quizOption, setQuizOption] = useState();
@@ -35,6 +36,25 @@ function CreateQuiz({ quiz, setQuiz }) {
 
   const handleChange = (e) => {
     setQuizData({ ...quizData, ["quizName"]: e.target.value });
+  };
+
+  const handleContinue = () => {
+    if (!quizData.quizName || quizData.isPoll === null) {
+      console.log(!quizData.quizName, " ", quizData.isPoll);
+      toast("Fields can't be empty", {
+        position: "top-center",
+        autoClose: 4000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: false,
+        draggable: true,
+        progress: undefined,
+        theme: "light",
+      });
+      return;
+    }
+    setQuiz(2);
+    dispatch(setQuizInfo(quizData));
   };
 
   console.log(quizData);
@@ -86,8 +106,7 @@ function CreateQuiz({ quiz, setQuiz }) {
             <button
               className={styles.continue}
               onClick={() => {
-                setQuiz(2);
-                dispatch(setQuizInfo(quizData));
+                handleContinue();
               }}
             >
               Continue
@@ -95,6 +114,7 @@ function CreateQuiz({ quiz, setQuiz }) {
           </div>
         </div>
       </div>
+      <ToastContainer />
     </div>
   );
 }

@@ -3,12 +3,14 @@ import styles from "./HomePage.module.css";
 import Dashboard from "../../components/Dashboard/Dashboard";
 import Analytics from "../../components/Analytics/Analytics";
 import CreateQuiz from "../../components/CreateQuiz/CreateQuiz";
+import ShareQuiz from "../../components/ShareQuiz/ShareQuiz";
 import { useNavigate } from "react-router-dom";
 import Quiz from "../../components/Quiz/Quiz";
 
 function HomePage() {
   const [component, setComponent] = useState(1);
   const [quiz, setQuiz] = useState(0);
+
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -65,6 +67,7 @@ function HomePage() {
       {component === 2 && <Analytics />}
       {quiz === 1 && <CreateQuiz quiz={quiz} setQuiz={setQuiz} />}
       {quiz === 2 && <Quiz quiz={quiz} setQuiz={setQuiz} />}
+      {quiz === 3 && <ShareQuiz quiz={quiz} setQuiz={setQuiz} />}
     </div>
   );
 }
