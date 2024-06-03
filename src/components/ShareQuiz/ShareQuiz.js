@@ -6,7 +6,7 @@ import "react-toastify/dist/ReactToastify.css";
 import { CopyToClipboard } from "react-copy-to-clipboard";
 import cross from "../../assets/icons/cross.png";
 
-function ShareQuiz({ quiz, setQuiz }) {
+function ShareQuiz({ quiz, setQuiz, isPoll }) {
   const quizIdState = useSelector((state) => state.quizId);
   const [quizLink, setQuizLink] = useState("");
   console.log(quizIdState);
@@ -16,7 +16,8 @@ function ShareQuiz({ quiz, setQuiz }) {
   }, []);
 
   const createQuizLink = () => {
-    let link = "http://localhost:3000/quiz/" + quizIdState?.value;
+    let link =
+      "https://quizzie-front-end-seven.vercel.app/quiz/" + quizIdState?.value;
     setQuizLink(link);
   };
 
@@ -25,7 +26,9 @@ function ShareQuiz({ quiz, setQuiz }) {
       <div className={styles.subContainer}>
         <img onClick={() => setQuiz(0)} src={cross} className={styles.close} />
         <div className={styles.innerContainer}>
-          <h1 className={styles.heading}>Congrats your Quiz is Published!</h1>
+          <h1 className={styles.heading}>
+            Congrats your {isPoll === true ? "Poll" : "Quiz"} is Published!
+          </h1>
           <div>{quizLink}</div>
           <CopyToClipboard
             text={quizLink}

@@ -56,8 +56,24 @@ export const getQuiz = async (quizId) => {
     }`;
 
     const response = await axios.get(reqUrl);
+    console.log("response", response);
 
     return response?.data?.data;
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+export const updateQuizResponses = async (id, quizAnswers) => {
+  try {
+    const reqUrl = `${
+      process.env.REACT_APP_BACKEND_URL
+    }/quiz/update/quizResponses?id=${id || ""}`;
+
+    console.log(quizAnswers);
+    console.log(reqUrl, quizAnswers);
+
+    const response = await axios.put(reqUrl, quizAnswers);
   } catch (error) {
     console.log(error);
   }

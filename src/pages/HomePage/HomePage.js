@@ -10,6 +10,7 @@ import Quiz from "../../components/Quiz/Quiz";
 function HomePage() {
   const [component, setComponent] = useState(1);
   const [quiz, setQuiz] = useState(0);
+  const [isPoll, setIsPoll] = useState(null);
 
   const navigate = useNavigate();
 
@@ -65,9 +66,13 @@ function HomePage() {
 
       {component === 1 && <Dashboard />}
       {component === 2 && <Analytics />}
-      {quiz === 1 && <CreateQuiz quiz={quiz} setQuiz={setQuiz} />}
+      {quiz === 1 && (
+        <CreateQuiz quiz={quiz} setQuiz={setQuiz} setIsPoll={setIsPoll} />
+      )}
       {quiz === 2 && <Quiz quiz={quiz} setQuiz={setQuiz} />}
-      {quiz === 3 && <ShareQuiz quiz={quiz} setQuiz={setQuiz} />}
+      {quiz === 3 && (
+        <ShareQuiz quiz={quiz} setQuiz={setQuiz} isPoll={isPoll} />
+      )}
     </div>
   );
 }

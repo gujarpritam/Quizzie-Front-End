@@ -4,7 +4,7 @@ import { setQuizInfo } from "../../slices/quizInfoSlice";
 import styles from "./CreateQuiz.module.css";
 import { ToastContainer, toast } from "react-toastify";
 
-function CreateQuiz({ quiz, setQuiz }) {
+function CreateQuiz({ quiz, setQuiz, setIsPoll }) {
   const [quizOption, setQuizOption] = useState();
   const dispatch = useDispatch();
   const [quizData, setQuizData] = useState({
@@ -29,6 +29,10 @@ function CreateQuiz({ quiz, setQuiz }) {
         .setAttribute("style", "background:none;color: #9F9F9F");
     }
   }, [quizOption]);
+
+  useEffect(() => {
+    setIsPoll(quizData.isPoll);
+  }, [quizData.isPoll]);
 
   const handleCancel = () => {
     setQuiz(0);

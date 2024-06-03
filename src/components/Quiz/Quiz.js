@@ -294,10 +294,17 @@ function Quiz({ quiz, setQuiz }) {
     }
   };
 
+  const handleSelect = (e) => {
+    if (e.target.id === "fiveSecond") {
+      setQuizInfo({ ...quizInfo, ["timer"]: "5" });
+    }
+    if (e.target.id === "tenSecond") {
+      setQuizInfo({ ...quizInfo, ["timer"]: "10" });
+    }
+  };
+
   console.log(quizDataState);
   console.log("quizInfo", quizInfo);
-  // console.log("selectedOption", selectedOption);
-  // console.log("currentQuestion", currentQuestion);
 
   return (
     <div className={styles.container}>
@@ -1449,7 +1456,26 @@ function Quiz({ quiz, setQuiz }) {
               </>
             )}
 
-            <div className={styles.timer}></div>
+            {quizInfo.isPoll === "false" && (
+              <div className={styles.timer}>
+                <span>Timer</span>
+                <button className={styles.button}>OFF</button>
+                <button
+                  className={styles.button}
+                  id="fiveSecond"
+                  onClick={handleSelect}
+                >
+                  5 sec
+                </button>
+                <button
+                  className={styles.button}
+                  id="tenSecond"
+                  onClick={handleSelect}
+                >
+                  10 sec
+                </button>
+              </div>
+            )}
           </div>
 
           <div className={styles.buttonBox}>
