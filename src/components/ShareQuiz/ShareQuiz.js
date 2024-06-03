@@ -15,7 +15,8 @@ function ShareQuiz({ quiz, setQuiz, isPoll }) {
   }, []);
 
   const createQuizLink = () => {
-    let link = "http://localhost:3000/quiz/" + quizIdState?.value;
+    let link =
+      "https://quizzie-front-end-seven.vercel.app/quiz/" + quizIdState?.value;
     setQuizLink(link);
   };
 
