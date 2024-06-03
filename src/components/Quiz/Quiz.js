@@ -11,7 +11,7 @@ function Quiz({ quiz, setQuiz }) {
   const [quizDetails, setQuizDetails] = useState();
   const quizDataState = useSelector((state) => state.quizInfo.value);
   const [questionCount, setQuestionCount] = useState([]);
-  // const [selectedOption, setSelectedOption] = useState("text");
+
   const [currentQuestion, setCurrentQuestion] = useState(0);
   const [queNames] = useState(["ques1", "ques2", "ques3", "ques4", "ques5"]);
   const dispatch = useDispatch();
@@ -41,8 +41,6 @@ function Quiz({ quiz, setQuiz }) {
       ["timer"]: "0",
       ["email"]: emailId,
     });
-
-    // console.log(quizDataState.quizName, " ", typeof quizInfo.isPoll);
   }, []);
 
   const addQuestion = () => {
@@ -53,14 +51,13 @@ function Quiz({ quiz, setQuiz }) {
     if (arr.length === 0) {
       arr.push(1);
       setQuestionCount([...arr]);
-      console.log(questionCount);
+
       return;
     }
     let lastElement = questionCount[questionCount.length - 1];
 
     arr.push(lastElement + 1);
     setQuestionCount([...arr]);
-    // console.log(questionCount);
   };
 
   const selectSlide = (id) => {
@@ -82,8 +79,6 @@ function Quiz({ quiz, setQuiz }) {
     const newArr = questionCount.filter((number) => number !== item);
     setQuestionCount([...newArr]);
 
-    console.log(e, item);
-
     setQuizInfo({ ...quizInfo, [queNames[item]]: ["", [[], [], [], []]] });
     if (currentQuestion === item) {
       selectSlide(0);
@@ -91,18 +86,11 @@ function Quiz({ quiz, setQuiz }) {
     e.stopPropagation();
   };
 
-  // const handleOption = (e) => {
-  //   setSelectedOption(e.target.id);
-  // };
-
   const handleCancel = () => {
     setQuiz(0);
   };
 
   const handleContinue = async () => {
-    console.log(localStorage.getItem("email"));
-
-    console.log(quizInfo);
     const result = await addQuiz(quizInfo);
 
     if (result) {
@@ -113,8 +101,6 @@ function Quiz({ quiz, setQuiz }) {
 
   const handleChange = (e) => {
     let quesArr = quizInfo[queNames[currentQuestion]];
-    // console.log(quesArr);
-    console.log(e.target.name);
 
     if (e.target.name === "question") {
       quesArr = Array.from(quesArr);
@@ -127,7 +113,6 @@ function Quiz({ quiz, setQuiz }) {
       e.target.name === "input3" ||
       e.target.name === "input4"
     ) {
-      // console.log(quizInfo.ques1[1]);
       quesArr = Array.from(quesArr);
       if (e.target.name === "input1") {
         quesArr[1][0] = e.target.value;
@@ -177,7 +162,6 @@ function Quiz({ quiz, setQuiz }) {
       setQuizInfo({ ...quizInfo, ["optionType"]: e.target.id });
     }
 
-    console.log(e.target.name);
     if (
       (e.target.name === "option1" ||
         e.target.name === "option2" ||
@@ -187,10 +171,8 @@ function Quiz({ quiz, setQuiz }) {
       quizInfo.isPoll === "false"
     ) {
       if (e.target.name === "option1") {
-        //option1, option2 represents ques1, ques2
         let arr = quizInfo.ques1;
 
-        console.log("classname", e.target.className);
         if (e.target.className === "radioButton1") {
           arr[2] = "option1";
         }
@@ -204,14 +186,10 @@ function Quiz({ quiz, setQuiz }) {
           arr[2] = "option4";
         }
         setQuizInfo({ ...quizInfo, ["ques1"]: arr });
-
-        console.log(quizInfo);
       }
       if (e.target.name === "option2") {
-        //option1, option2 represents ques1, ques2
         let arr = quizInfo.ques2;
 
-        console.log(e.target.className);
         if (e.target.className === "radioButton1") {
           arr[2] = "option1";
         }
@@ -225,14 +203,10 @@ function Quiz({ quiz, setQuiz }) {
           arr[2] = "option4";
         }
         setQuizInfo({ ...quizInfo, ["ques2"]: arr });
-
-        console.log(quizInfo);
       }
       if (e.target.name === "option3") {
-        //option1, option2 represents ques1, ques2
         let arr = quizInfo.ques3;
 
-        console.log(e.target.className);
         if (e.target.className === "radioButton1") {
           arr[2] = "option1";
         }
@@ -246,14 +220,10 @@ function Quiz({ quiz, setQuiz }) {
           arr[2] = "option4";
         }
         setQuizInfo({ ...quizInfo, ["ques3"]: arr });
-
-        console.log(quizInfo);
       }
       if (e.target.name === "option4") {
-        //option1, option2 represents ques1, ques2
         let arr = quizInfo.ques4;
 
-        console.log(e.target.className);
         if (e.target.className === "radioButton1") {
           arr[2] = "option1";
         }
@@ -267,14 +237,10 @@ function Quiz({ quiz, setQuiz }) {
           arr[2] = "option4";
         }
         setQuizInfo({ ...quizInfo, ["ques4"]: arr });
-
-        console.log(quizInfo);
       }
       if (e.target.name === "option5") {
-        //option1, option2 represents ques1, ques2
         let arr = quizInfo.ques5;
 
-        console.log(e.target.className);
         if (e.target.className === "radioButton1") {
           arr[2] = "option1";
         }
@@ -288,8 +254,6 @@ function Quiz({ quiz, setQuiz }) {
           arr[2] = "option4";
         }
         setQuizInfo({ ...quizInfo, ["ques5"]: arr });
-
-        console.log(quizInfo);
       }
     }
   };
@@ -302,9 +266,6 @@ function Quiz({ quiz, setQuiz }) {
       setQuizInfo({ ...quizInfo, ["timer"]: "10" });
     }
   };
-
-  console.log(quizDataState);
-  console.log("quizInfo", quizInfo);
 
   return (
     <div className={styles.container}>
@@ -395,7 +356,6 @@ function Quiz({ quiz, setQuiz }) {
               type="radio"
               id="text"
               name="optionType"
-              // selectedOption
               onChange={handleChange}
               checked={quizInfo.optionType === "text"}
             />
@@ -1499,56 +1459,3 @@ function Quiz({ quiz, setQuiz }) {
 }
 
 export default Quiz;
-
-// if (
-//   quizInfo.optionType === "text-image" &&
-//   (quizInfo.ques1[0].length === 0 ||
-//     (typeof quizInfo.ques1[1][0] !== "string" &&
-//       quizInfo.ques1[1][0]?.length < 2) ||
-//     (typeof quizInfo.ques1[1][1] !== "string" &&
-//       quizInfo.ques1[1][1]?.length < 2) ||
-//     typeof quizInfo.ques1[1][0] === "string" ||
-//     typeof quizInfo.ques1[1][1] === "string")
-// ) {
-//   toast(`Please fill the details of Question 1`, {
-//     position: "top-left",
-//     autoClose: 4000,
-//     hideProgressBar: false,
-//     closeOnClick: true,
-//     pauseOnHover: false,
-//     draggable: true,
-//     progress: undefined,
-//     theme: "light",
-//   });
-//   return;
-// }
-// if (
-//   quizInfo.optionType !== "text-image" &&
-//   (quizInfo.ques1[0].length === 0 ||
-//     typeof quizInfo.ques1[1][0] !== "string" ||
-//     typeof quizInfo.ques1[1][1] !== "string")
-// ) {
-//   toast(`Please fill the details of Question 1`, {
-//     position: "top-left",
-//     autoClose: 4000,
-//     hideProgressBar: false,
-//     closeOnClick: true,
-//     pauseOnHover: false,
-//     draggable: true,
-//     progress: undefined,
-//     theme: "light",
-//   });
-//   return;
-// }
-// if (isEmptyField()) {
-//   document
-//     .getElementsByClassName(styles.inputError)[0]
-//     .setAttribute("style", `display: flex;`);
-//   return;
-// }
-// if (storyDetails?.category) {
-//   await updateStoryPostById(storyDetails?._id, storyData);
-//   dispatch(unSetSlide());
-//   dispatch(unSetEditPost());
-//   return;
-// }

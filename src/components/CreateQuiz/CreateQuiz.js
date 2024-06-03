@@ -44,7 +44,6 @@ function CreateQuiz({ quiz, setQuiz, setIsPoll }) {
 
   const handleContinue = () => {
     if (!quizData.quizName || quizData.isPoll === null) {
-      console.log(!quizData.quizName, " ", quizData.isPoll);
       toast("Fields can't be empty", {
         position: "top-center",
         autoClose: 4000,

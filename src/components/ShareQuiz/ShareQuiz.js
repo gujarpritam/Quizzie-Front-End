@@ -9,15 +9,13 @@ import cross from "../../assets/icons/cross.png";
 function ShareQuiz({ quiz, setQuiz, isPoll }) {
   const quizIdState = useSelector((state) => state.quizId);
   const [quizLink, setQuizLink] = useState("");
-  console.log(quizIdState);
 
   useEffect(() => {
     createQuizLink();
   }, []);
 
   const createQuizLink = () => {
-    let link =
-      "https://quizzie-front-end-seven.vercel.app/quiz/" + quizIdState?.value;
+    let link = "http://localhost:3000/quiz/" + quizIdState?.value;
     setQuizLink(link);
   };
 

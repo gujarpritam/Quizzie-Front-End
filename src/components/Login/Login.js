@@ -14,7 +14,6 @@ function Login() {
   };
 
   const handleSubmit = async () => {
-    console.log(formData);
     if (!formData.email || !formData.password) {
       toast("Fields can't be empty", {
         position: "top-center",
@@ -31,7 +30,6 @@ function Login() {
 
     const result = await loginUser(formData);
 
-    console.log(result);
     if (result) {
       navigate("/home");
       return;

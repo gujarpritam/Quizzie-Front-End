@@ -13,7 +13,6 @@ function ShowQuiz({ id }) {
   const [lastQuestion, setLastQuestion] = useState(null);
   const [lastAns, setLastAns] = useState(null);
   const [score, setScore] = useState(0);
-  // const [responses, setResponses] = useState([]);
 
   const [quizAnswers, setQuizAnswers] = useState({
     ques1: null,
@@ -39,7 +38,7 @@ function ShowQuiz({ id }) {
   const handleQuizUpdate = async (id) => {
     await updateImpressionsOnQuiz(id);
     const result = await getQuiz(id);
-    console.log("result", result);
+
     setResArr([
       [...result.ques1],
       [...result.ques2],
@@ -47,7 +46,6 @@ function ShowQuiz({ id }) {
       [...result.ques4],
       [...result.ques5],
     ]);
-    console.log(resArr);
 
     setQuizInfo({
       ...quizInfo,
@@ -57,12 +55,9 @@ function ShowQuiz({ id }) {
     });
 
     setState(1);
-    console.log("isPoll", quizInfo);
   };
 
   const updateQuiz = async () => {
-    console.log("updateQuiz");
-    console.log(lastQuestion, lastAns);
     if (quizInfo.isPoll === "false") {
       if (lastQuestion === 1) {
         if (lastAns === true) {
@@ -80,7 +75,6 @@ function ShowQuiz({ id }) {
       }
 
       if (lastQuestion === 2) {
-        console.log("2. lastAns", lastAns);
         if (lastAns === true) {
           setQuizAnswers({
             ...quizAnswers,
@@ -93,7 +87,6 @@ function ShowQuiz({ id }) {
             ["ques2"]: false,
           });
         }
-        console.log("quizAns", quizAnswers);
       }
 
       if (lastQuestion === 3) {
@@ -141,7 +134,6 @@ function ShowQuiz({ id }) {
         }
       }
 
-      console.log(lastAns);
       await updateQuizResponses(id, quizAnswers);
 
       let totalScore = 0;
@@ -154,7 +146,7 @@ function ShowQuiz({ id }) {
       if (lastAns === true) {
         totalScore = totalScore + 1;
       }
-      console.log(totalScore);
+
       setScore(totalScore);
     }
   };
@@ -165,10 +157,6 @@ function ShowQuiz({ id }) {
 
   const saveOption = (questionNumber) => {
     if (quizInfo.isPoll === "false") {
-      // console.log(resArr[0][2]);
-      // console.log("question num", questionNumber);
-      // console.log(option);
-
       if (questionNumber === 1) {
         if (option === resArr[0][2]) {
           setQuizAnswers({
@@ -185,29 +173,28 @@ function ShowQuiz({ id }) {
         }
         setLastQuestion(1);
         setOption(null);
-        // console.log(quizAnswers);
       }
 
       if (questionNumber === 2) {
-        console.log("saveOpt");
-        console.log(resArr[1][2]);
-        console.log(option);
         if (option === resArr[1][2]) {
-          setQuizAnswers({
-            ...quizAnswers,
-            ["ques2"]: true,
+          setQuizAnswers((prev) => {
+            return {
+              ...prev,
+              ["ques2"]: true,
+            };
           });
           setLastAns(true);
         } else if (option !== null) {
-          setQuizAnswers({
-            ...quizAnswers,
-            ["ques2"]: false,
+          setQuizAnswers((prev) => {
+            return {
+              ...prev,
+              ["ques2"]: false,
+            };
           });
           setLastAns(false);
         }
         setLastQuestion(2);
         setOption(null);
-        console.log(quizAnswers);
       }
 
       if (questionNumber === 3) {
@@ -267,17 +254,8 @@ function ShowQuiz({ id }) {
   };
 
   useEffect(() => {
-    console.log(id);
     handleQuizUpdate(id);
-    // const interval = setInterval(() => getTime(), 1000);
-    // return () => clearInterval(interval);
   }, []);
-
-  console.log(quizAnswers);
-  console.log(resArr);
-  console.log(quizInfo);
-  console.log(option);
-  console.log(score);
 
   return (
     <div className={styles.container}>
@@ -1035,16 +1013,3 @@ function ShowQuiz({ id }) {
 }
 
 export default ShowQuiz;
-
-// {resArr.map((item) => {
-//   return item.map((subItem, index) => (
-//     <div>
-//       {typeof subItem === "string" && subItem.length > 0 ? (
-//         <h1>{subItem}</h1>
-//       ) : (
-//         ""
-//       )}
-//       {}
-//     </div>
-//   ));
-// })}

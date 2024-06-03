@@ -19,7 +19,7 @@ function Register({ auth, setAuth }) {
       document
         .getElementById(event.target.name)
         .setAttribute("style", `border: none;`);
-      console.log();
+
       if (event.target.id === "name") {
         document
           .getElementsByClassName(styles.error)[0]
@@ -92,8 +92,6 @@ function Register({ auth, setAuth }) {
     }
 
     const result = await registerUser(userData);
-
-    console.log(result);
 
     if (result) {
       setAuth(1);
